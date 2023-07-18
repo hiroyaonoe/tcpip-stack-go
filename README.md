@@ -1,2 +1,2 @@
 # tcpip-stack-go
-TCP/IPプロトコルスタックをGoで実装
+An Implementation of TCP/IP Protocol Stack with Go
