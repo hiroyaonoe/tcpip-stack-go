@@ -16,7 +16,14 @@ func TestTap(t *testing.T) {
 		wantName string
 		wantErr  bool
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Create new tap device tap0",
+			args: args{
+				name: "tap0",
+			},
+			wantName: "tap0",
+			wantErr:  false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -25,6 +32,7 @@ func TestTap(t *testing.T) {
 				t.Errorf("NewTap() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
+			t.Logf("Name: %s, Addr: %x", got.Name(), got.Addr())
 			if diff := cmp.Diff(tt.wantName, got.Name(), nil); diff != "" {
 				t.Errorf("Tap{}.Name() mismatch (-want +got):\n%s", diff)
 			}
