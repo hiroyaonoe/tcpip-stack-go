@@ -18,7 +18,7 @@ func openTap(name string) (string, *os.File, error) {
 	if err != nil {
 		return "", nil, err
 	}
-	name, err := ioctl.TUNSETIFF(file.Fd(), name, syscall.IFF_TAP|syscall.IFF_NO_PI)
+	name, err = ioctl.TUNSETIFF(file.Fd(), name, syscall.IFF_TAP|syscall.IFF_NO_PI)
 	if err != nil {
 		return "", nil, err
 	}
