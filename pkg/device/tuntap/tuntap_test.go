@@ -1,7 +1,6 @@
 package tuntap
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -20,9 +19,9 @@ func TestTap(t *testing.T) {
 		{
 			name: "Create new tap device tap0",
 			args: args{
-				name: "tap10",
+				name: "tap0",
 			},
-			wantName: "tap10",
+			wantName: "tap0",
 			wantErr:  false,
 		},
 	}
@@ -33,8 +32,7 @@ func TestTap(t *testing.T) {
 				t.Errorf("NewTap() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			fmt.Println(got.Name())
-			fmt.Println(got.Addr())
+			t.Logf("Name: %s, Addr: %x", got.Name(), got.Addr())
 			if diff := cmp.Diff(tt.wantName, got.Name(), nil); diff != "" {
 				t.Errorf("Tap{}.Name() mismatch (-want +got):\n%s", diff)
 			}
