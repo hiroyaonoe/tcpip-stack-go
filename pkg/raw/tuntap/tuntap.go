@@ -3,7 +3,7 @@ package tuntap
 import (
 	"io"
 
-	"github.com/hiroyaonoe/tcpip-stack-go/pkg/device"
+	"github.com/hiroyaonoe/tcpip-stack-go/pkg/raw"
 )
 
 type Tap struct {
@@ -11,7 +11,7 @@ type Tap struct {
 	name string
 }
 
-var _ device.Device = &Tap{}
+var _ raw.Device = &Tap{}
 
 func NewTap(name string) (*Tap, error) {
 	name, file, err := openTap(name)
