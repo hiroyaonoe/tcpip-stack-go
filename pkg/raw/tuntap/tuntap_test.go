@@ -1,9 +1,11 @@
 package tuntap
 
 import (
+	"context"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/hiroyaonoe/tcpip-stack-go/lib/log"
 )
 
 func TestTap(t *testing.T) {
@@ -27,7 +29,8 @@ func TestTap(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewTap(tt.args.name)
+			ctx := log.WithContext(context.Background(), log.New(log.LevelDebug))
+			got, err := NewTap(ctx, tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("NewTap() error = %v, wantErr %v", err, tt.wantErr)
 				return
