@@ -1,6 +1,7 @@
 package tuntap
 
 import (
+	"context"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -27,7 +28,7 @@ func TestTap(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewTap(tt.args.name)
+			got, err := NewTap(context.Background(), tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("NewTap() error = %v, wantErr %v", err, tt.wantErr)
 				return
