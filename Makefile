@@ -27,8 +27,9 @@ fmt:
 curl:
 	curl --interface tap0 http://10.0.0.2/
 
+DATE := $(shell date +%Y-%m-%d_%H-%M-%S)
+
 .PHONY:capture
 capture:
-	DATE := $(date +%Y-%m-%d_%H-%M-%S)
 	tcpdump -i tap0 -w wireshark/capture_$(DATE).pcap
 
