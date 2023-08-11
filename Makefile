@@ -23,6 +23,19 @@ vet:
 fmt:
 	go fmt ./...
 
+.PHONY:create-tap
+create-tap:
+	ip tuntap add mode tun dev tap0 &&\
+	ip link set tap0 up
+
+.PHONY:add-addr
+add-addr:
+	ip addr add 10.0.0.1/24 dev tap0
+
+.PHONY:delete-tap
+delete-tap:
+	ip link del dev tap0
+
 .PHONY:curl
 curl:
 	curl --interface tap0 http://10.0.0.2/
