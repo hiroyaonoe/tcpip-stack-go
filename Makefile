@@ -22,3 +22,10 @@ vet:
 .PHONY:fmt
 fmt:
 	go fmt ./...
+
+.PHONY:curl
+curl:
+	curl --interface tun0 http://10.0.0.2/
+
+.PHONY:capture
+	tcpdump -i tun0 -w wireshark/capture.pcap
