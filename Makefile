@@ -25,7 +25,8 @@ fmt:
 
 .PHONY:curl
 curl:
-	curl --interface tun0 http://10.0.0.2/
+	curl --interface tap0 http://10.0.0.2/
 
 .PHONY:capture
-	tcpdump -i tun0 -w wireshark/capture.pcap
+capture:
+	tcpdump -i tap0 -w wireshark/capture.pcap
