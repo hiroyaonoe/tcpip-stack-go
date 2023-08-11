@@ -29,4 +29,6 @@ curl:
 
 .PHONY:capture
 capture:
-	tcpdump -i tap0 -w wireshark/capture.pcap
+	DATE := $(date +%Y-%m-%d_%H-%M-%S)
+	tcpdump -i tap0 -w wireshark/capture_$(DATE).pcap
+
