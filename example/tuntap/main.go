@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"encoding/hex"
+	"fmt"
 	"io"
 	"os"
 
@@ -20,7 +22,18 @@ func main() {
 
 	var eg errgroup.Group
 
-	eg.Go(func() error { _, err := io.Copy(dev, os.Stdin); return err })
+	eg.Go(func() error {
+		buf := make([]byte, 4096)
+		for {
+			n, err := dev.Read(buf)
+			if n > 0 {
+				fmt.Printf("%s", hex.Dump(buf[:n]))
+			}
+			if err != nil {
+				return err
+			}
+		}
+	})
 	eg.Go(func() error { _, err := io.Copy(os.Stdout, dev); return err })
 
 	err = eg.Wait()
